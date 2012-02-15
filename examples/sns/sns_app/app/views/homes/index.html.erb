@@ -1,0 +1,52 @@
+<div class="row">
+		
+<div class="span12">
+			
+<h1>Demo Time</h1>
+
+<br/>
+
+<%= form_tag("/sendmessage", :method => "post") do %>
+  <%= label_tag(:message, "Message to send:") %>
+  <%= text_field_tag(:message) %>
+  <%= submit_tag("Send", :class => "btn btn-primary") %>
+<% end %>
+
+<br />
+
+<%= form_tag("/subscribe", :method => "post") do %>
+  <%= label_tag(:email, "New subscription:") %>
+  <%= text_field_tag(:email) %>
+  <%= submit_tag("Subscribe", :class => "btn btn-success") %>
+<% end %>
+
+<ul>
+	
+<style type="text/css">
+td{
+	min-width: 100px;
+	text-align: center;
+}
+</style>
+
+<h3>Current Subscriptions</h3>
+<table>
+  	<tr>
+    <th>Endpoint</th>
+    <th>Protocol</th>
+    <th>Confirmed</th>
+	<th>Delete</td>
+  	</tr>
+	
+	<% @subs.each do |sub| %>
+	<tr>
+	<td><%= sub.endpoint %></td>
+	<td><%= sub.protocol %></td>
+	<td><%= sub.exists? %></td>
+	<td><%= link_to("Delete", {:action => "delete", :id => sub.endpoint}, {:class => "btn btn-danger"} )  %></td>
+	</tr>
+	<% end %>
+</table>
+
+</div>
+</div>
